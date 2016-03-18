@@ -1,0 +1,9 @@
+applications:
+- services:
+  - myworkstyle-backend-cloudantNoSQLDB
+  - natural-language-classifier-8e
+  - Dialog-8e
+  name: myworkstyle-web
+  command: node server.js
+  path: .
+  memory: 512M

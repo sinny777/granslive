@@ -1,0 +1,24 @@
+{
+	"name": "bluemixnode",
+	"version": "0.0.1",
+	"private": true,
+    "main" : "views/index.html",
+	"dependencies": {
+        "express": "~3.2.6",
+        "multer":"*",
+        "ejs": "~0.7.1",
+        "moment": "*",
+        "connect-flash" : "*",
+        "requirejs" : "*",
+        "node-uuid" : "*",
+        "grunt": "*",
+        "grunt-nodemon": "*",
+        "grunt-npm-install" : "*",
+        "grunt-bower-installer" : "*",
+        "grunt-contrib-requirejs" : "*",
+        "grunt-contrib-copy":"*",
+		"util":"*",
+		"socket.io":"*",
+		"watson-developer-cloud": "~1.0.6"
+	}
+}

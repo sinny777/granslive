@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+	<meta http-equiv="X-UA-Compatible" content="chrome=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="fragment" content="!" />
+  <base href="/">
+
+    <title data-ng-bind="viewTitle ? viewTitle + ' | Bluemix' : 'IBM Bluemix Demos'">IBM - Bluemix Demos</title>
+
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <LINK REV="made" href="mailto:gurvsin3@in.ibm.com">
+	<META NAME="keywords"  	CONTENT="IBM, Bluemix, Demos, Nodejs, Watson APIs">
+	<META NAME="description"
+ 	 CONTENT="IBM Bluemix Demos and Services information">
+	<META NAME="author" CONTENT="Gurvinder Singh">
+	<META NAME="ROBOTS" CONTENT="ALL">
+
+	<link rel="stylesheet" type="text/css" href="scripts/lib/angular-toastr/dist/angular-toastr.css" />
+  <link rel="stylesheet" href="scripts/lib/bootstrap/dist/css/bootstrap.css">
+   <link rel="stylesheet" href="css/font-awesome.css">
+  <link rel="stylesheet" href="css/app.css">
+
+</head>
+<body data-ng-controller="CommonController">
+
+    <div data-ng-include="'partials/common/topHeader.html'" ></div>
+
+    <div id="app-container" ng-view></div>
+
+    <footer>
+        <div data-ng-include src="'partials/common/footer.html'"></div>
+    </footer>
+
+    <script data-main="scripts/src/main.js" src="scripts/lib/requirejs/require.js"></script>
+
+</body>
+</html>

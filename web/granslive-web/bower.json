@@ -1,0 +1,27 @@
+{
+  "name": "bluemixnode",
+  "version": "0.0.2",
+  "dependencies": {
+    "angular": "*",
+    "angular-mocks": "*",
+    "angular-route": "*",
+    "angular-local-storage" : "*",
+    "angular-animate" : "*",
+    "angular-toastr" : "*",
+    "angular-bootstrap":"*",
+    "angular-filesystem":"*",
+    "jquery": "*",
+    "bootstrap": "*",
+    "cryptojslib" : "*",
+    "querystring":"*",
+    "requirejs" : "*"
+  },
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

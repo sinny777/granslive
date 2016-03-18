@@ -1,0 +1,89 @@
+<ion-view view-title="Dashboard" data-ng-init="fetchSelectedPlace()">
+    <ion-content ng-class="{expanded:isExpanded}">
+    
+    	<div class="hero slide-up" style="background-image: url('img/livingRoomPic3.jpg');">
+            <div class="content">
+                <div class="avatar" style="background-image: url('{{selectedPlace.imagePath}}');"></div>
+                <h3><a class="light">{{selectedPlace.title}}</a></h3>
+               <h4></h4> 
+            </div>
+        </div>
+        
+        <div  data-ng-if="selectedPlace.id" >
+		        <div class="tabs tabs-dark tabs-icon-top static">
+		        	<a ui-sref="app.friends" class="tab-item">
+		                <i class="icon ion-ios-pulse-strong"></i> Health
+		            </a>
+		            <a ui-sref="app.rooms" class="tab-item">
+		                <i class="icon ion-android-bulb"></i> Appliances
+		            </a>
+		            <a ui-sref="app.gallery" class="tab-item">
+		                <i class="icon ion-clock"></i> Scheduler
+		            </a>
+		        </div>
+        	<div class="list animate-fade-slide-in-right" >
+		        <div class="item card-item" >
+		            <div ui-sref="app.gallery" class="card stable-bg ink ink-dark" >
+		                <div class="item item-avatar item-text-wrap">
+		                    <span class="avatar avatarRect" style="background-image: url('img/livingRoom.png');"></span>
+		                    <strong>Living Room</strong> status.
+		                    <div class="card-footer text-right">
+		                        <i class="icon ion-thermometer positive"></i></i> 24 &deg;C
+		                        <i class="icon ion-waterdrop assertive"></i></i> 54%
+		                        <div class="pull-left">
+		                            <i class="icon ion-clock"></i> just now
+		                        </div>
+		                    </div>
+		                </div>
+		        	</div>
+		        </div>
+		        <div class="item card-item">    
+		        	<div ui-sref="app.gallery" class="card stable-bg ink ink-dark">   
+			             <div class="item item-avatar item-text-wrap">
+			                 <span class="avatar avatarRect" style="background-image: url('img/bedRoom.png');"></span>
+			                 <strong>Bed Room 1</strong> status.
+			                 <div class="card-footer text-right">
+			                     <i class="icon ion-thermometer positive"></i></i> 22 &deg;C
+			                     <i class="icon ion-waterdrop assertive"></i></i> 48%
+			                     <div class="pull-left">
+			                         <i class="icon ion-clock"></i> just now
+			                     </div>
+			                 </div>
+			             </div>
+			         </div>
+		        </div>
+		        <div class="item card-item"> 
+		        	<div ui-sref="app.gallery" class="card stable-bg ink ink-dark">       
+			              <div class="item item-avatar item-text-wrap">
+			                  <span class="avatar avatarRect" style="background-image: url('img/bedRoom.png');"></span>
+			                  <strong>Bed Room 2</strong> status.
+			                  <div class="card-footer text-right">
+			                      <i class="icon ion-thermometer positive"></i></i> 24 &deg;C
+			                      <i class="icon ion-waterdrop assertive"></i></i> 51%
+			                      <div class="pull-left">
+			                          <i class="icon ion-clock"></i> just now
+			                      </div>
+			                  </div>
+			              </div>
+		             </div>
+		        </div>
+		        <div class="item card-item"> 
+		        	<div ui-sref="app.gallery" class="card stable-bg ink ink-dark">        
+			             <div class="item item-avatar item-text-wrap">
+			                 <span class="avatar avatarRect" style="background-image: url('img/kitchen.png');"></span>
+			                 <strong>Kitchen</strong> status.
+			                 <div class="card-footer text-right">
+			                     <i class="icon ion-thermometer positive"></i></i> 34 &deg;C
+			                     <i class="icon ion-waterdrop assertive"></i></i> 40%
+			                     <div class="pull-left">
+			                         <i class="icon ion-clock"></i> just now
+			                     </div>
+			                 </div>
+			             </div>
+			        </div>
+		        </div>
+		     </div>
+		 </div>
+		     
+    </ion-content>
+</ion-view>

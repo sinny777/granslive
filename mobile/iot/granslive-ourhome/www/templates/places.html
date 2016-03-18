@@ -1,0 +1,38 @@
+<ion-view view-title="Places" data-ng-init="fetchPlaces();" >
+    <ion-content ng-class="{expanded:isExpanded}"  >
+    	
+    	<div class="hero slide-up" style="background-image: url('img/room3.jpg');">
+            <div class="content">
+            	
+                <div class="avatar" data-ng-if="currentUser.google_id" style="background-image: url('{{currentUser.picture}}');"></div>
+                <div class="avatar" data-ng-if="!currentUser.google_id" style="background-image: url('img/logo.png');"></div>
+                <h3 data-ng-if="currentUser.google_id"><a class="light">{{currentUser.name}}</a></h3>
+                <h3 data-ng-if="!currentUser.google_id"><a class="light">GransLive</a></h3>
+                <h4>Our Home</h4>
+            </div>
+        </div>
+      
+    	<div data-ng-if="places.length > 1" >
+    		<div class="list animate-fade-slide-in" >
+		         <div class="list half" data-ng-repeat="place in places" >
+		            <div data-ng-click="placeSelected(place);" class="card card-gallery item item-text-wrap" data-ng-if="place">
+		                <div class="ink dark-bg">
+		                    <h2>{{place.title}}</h2>
+		                    <img class="full-image" src="{{place.imagePath}}" />
+		                </div>
+		                <div class="item tabs tabs-secondary tabs-icon-left">
+		                    <a class="tab-item stable-bg assertive">
+		                        <i class="icon ion-heart"></i>
+		                        4
+		                    </a>
+		                    <a class="tab-item stable-bg positive-900">
+		                        <i class="icon ion-chatbubbles"></i>
+		                        2
+		                    </a>
+		                </div>
+		            </div>
+			  </div>   
+			</div> 
+		</div>
+    </ion-content>
+</ion-view>

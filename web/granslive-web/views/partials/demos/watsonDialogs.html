@@ -1,0 +1,338 @@
+ 
+ <div class="panel-group" style="padding-top: 15px;">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" href="#collapse1">Watson Dialog Demo Information</a>
+      </h4>
+    </div>
+    <div id="collapse1" class="panel-collapse collapse">
+      <div class="panel-body no-padding">
+      	<div class="jumbotron no-padding">
+				<div class="container">
+						<div class="col-lg-2 col-md-2 hidden-sm hidden-xs">
+								<img src="images/language-translation.svg" class="service-icon" width="150px">
+						</div>
+						<div class="col-lg-10 col-md-10 col-sm-12">
+								<h1>Watson Dialog Demo</h1>
+								<p>These are some of the key features of this demo:
+									<ul>
+										<li>It makes use of NodeJs/Express for Server side handling</li>
+										<li><a href="https://angularjs.org/" target="_blank">AngularJs:</a> for client side framework (handling logic)</li>
+										<li><a href="http://getbootstrap.com/" target="_blank">Bootstrap:</a> for CSS and stylesheet/theme</li>
+										<li><a href="http://bower.io/" target="_blank">Bower:</a> for handling front end dependencies</li>
+										<li><a href="http://gruntjs.com/" target="_blank">Grunt:</a> for running build tasks</li>
+									</ul>
+								</p>
+								<h5><strong>Functionality:</strong> The IBM Watson™ Dialog service provides a comprehensive, robust, platform for managing conversations between virtual agents and users through an application programming interface (API). These conversations are commonly referred to as dialogs.</h5>
+						</div>
+						<!-- .col-lg-10 -->
+				</div>
+				<!-- .container -->
+		</div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="container" data-ng-init="initDialogDemo()">
+	<div class="alert {{alert.cssClass}} fade in" data-ng-if="alert.cssClass" >
+	  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+	  <strong>{{alert.title}}</strong> {{alert.message}}
+	</div>
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="javascirpt:void(0);" data-ng-click="resetAll()" data-target="#conversationsTab" data-toggle="tab">Conversation</a></li>
+        <li><a href="javascirpt:void(0);" data-ng-click="resetAll()" data-target="#configurationTab" data-toggle="tab">Configuration</a></li>
+    </ul>
+	<div class="tab-content">
+	
+	<!-- ---------BELOW CODE FOR CONVERSATION TAB--------- -->
+	
+		<div class="row tab-pane fade in active" id="conversationsTab" >
+			<br />
+            <div class="col-sm-9">
+                <!-- <h5><strong>Note: </strong>Please select a Dialog from the settings at the top right of the chat panel</h5> -->
+				<div class="col-md-12 col-sm-12">
+		                <div class="chat-box-div">
+		                    <div class="chat-box-head">
+		                        HAVE A CONVERSATION 
+		                            <div class="btn-group pull-right">
+		                                <a class="btn btn-info btn-xs pull-right" role="button" href="javascript:void(0);" data-ng-click="resetAll()" data-toggle="tooltip" data-placement="top" title="Refresh"><span class="fa fa-refresh" ></span></a>
+		                            </div>
+		                    </div>
+		                    <div class="panel-body chat-box-main" data-ng-show="conversations && conversations.length > 0" >
+		                    	<div data-ng-repeat="conversation in conversations">
+			                        <div class="chat-box-left" data-ng-if="conversation.userInput">
+			                            {{conversation.userInput}}
+			                        </div>
+			                        <div class="chat-box-name-left" data-ng-if="conversation.userInput">
+			                            <img src="images/user.png" alt="bootstrap Chat box user image" class="img-circle" />
+			                            -  User
+			                        </div>
+			                        <hr class="hr-clas" />
+			                        <div class="chat-box-right" data-ng-show="conversation.watsonResp">
+			                        	<p ng-bind-html="conversation.watsonResp | unsafe"></p>
+			                        </div>
+			                        <div class="chat-box-name-right" data-ng-show="conversation.watsonResp">
+			                            <img src="images/watson.jpg" alt="bootstrap Chat box user image" class="img-circle" />
+			                            - Watson
+			                        </div>
+			                        <hr class="hr-clas" />
+		                        </div>
+		                        
+		                    </div>
+		                    <div class="chat-box-footer">
+		                        <div class="input-group">
+		                            <input type="text" class="form-control" data-ng-model="userInput" placeholder="Enter Text Here..." data-ng-keypress="checkIfEnterPressed($event);" >
+		                                <!-- <button class="btn btn-info" type="button" data-ng-click="converseWithWatson()">SEND</button> -->
+		                                <span class="input-group-addon">
+									        <a data-ng-if="!recording" style="text-decoration: none;" href="javascript:void(0);" data-ng-click="recordAudio()" data-toggle="tooltip" data-placement="top" title="Speak" > <i class="fa fa-microphone" ></i></a>
+		                                	<a data-ng-if="recording" style="text-decoration: none;" href="javascript:void(0);" data-ng-click="stopRecordingAudio()" data-toggle="tooltip" data-placement="top" title="Speak" > <i class="fa fa-microphone-slash" ></i></a>
+									    </span>
+		                        </div>
+		                    </div>
+		
+		                </div>
+		
+		            </div>
+            </div>
+            <div class="col-sm-3">
+			    <div class="panel panel-default">
+			        <div class="panel-heading">Conversation Details</div>
+			        <div class="panel-body">
+    					<ul class="list-unstyled">
+							<li data-ng-show="prevConversation.params && prevConversation.params.dialog_id"><a href="#" target="_blank">Dialog Id:</a> {{prevConversation.params.dialog_id}}</li>
+							<li data-ng-show="!prevConversation.params || !prevConversation.params.dialog_id"><a href="#" target="_blank">Dialog:</a> No Dialog Template</li>
+							
+							<li data-ng-show="prevConversation.dialogResp && prevConversation.dialogResp.client_id">Client Id: {{prevConversation.client_id}}</li>
+							<li data-ng-show="prevConversation.dialogResp && prevConversation.dialogResp.conversation_id">Conversation Id: {{prevConversation.dialogResp.conversation_id}}</li>
+						</ul>
+    					
+			        </div>
+			        
+			        <div class="panel-heading">Profile Details</div>
+			        <div class="panel-body">
+    					<ul class="list-unstyled" data-ng-if="prevConversation.dialogResp.profileVariables && prevConversation.dialogResp.profileVariables.name_values && prevConversation.dialogResp.profileVariables.name_values.length > 0" >
+    						<li data-ng-repeat="profileVar in prevConversation.dialogResp.profileVariables.name_values" data-ng-show="profileVar.name">{{profileVar.name}}: {{profileVar.value}}</li>
+						</ul>
+			        </div>
+			    </div>
+            </div>
+        </div>
+        
+        <!-- ---------BELOW CODE FOR CONFIGURATION TAB--------- -->
+        
+        <div class="row tab-pane fade" id="configurationTab" >
+            <div class="col-sm-9" data-ng-show="showConfigDiv == 'DIALOGS'">
+            	<br />
+            	<div>
+            		<div class="col-sm-10"><h4>List of Dialogs</h4></div>
+            		<div class=""><button type="submit" class="btn btn-default" data-ng-click="showAddDialog()">Add New Dialog</button></div>
+            	</div>
+            	<br />
+            	
+	           	 <ul class="list-group no-padding"  >
+	           	 	<li class="list-group-item"  data-ng-repeat="dialog in dialogs">
+	           	 		<img src="/images/dialog.png" width="15px" />&nbsp;{{dialog.name}} ({{dialog.dialog_id}})</span>
+	            	 	<div class="pull-right">
+	            	 		<a style="text-decoration: none;" href="javascript:void(0);" data-ng-click="testDialog(dialog)" data-toggle="tooltip" data-placement="top" title="Test" > <span class="fa fa-comments" ></span></a>
+	            	 		&nbsp;<a style="text-decoration: none;" href="javascript:void(0);" data-ng-click="showUpdateDialog(dialog)" data-toggle="tooltip" data-placement="top" title="Update" > <span class="fa fa-edit" ></span></a>
+	            	 		&nbsp;<a style="color:red;text-decoration: none;" href="javascript:void(0);" data-ng-click="deleteDialog(dialog)" data-toggle="tooltip" data-placement="top" title="Delete" > <span class="fa fa-remove" ></span></a> 
+						</div>
+					</li>
+				</ul>
+            	
+            </div>
+            
+            
+            <div class="col-sm-9" data-ng-show="showConfigDiv == 'ADD_DIALOG'">
+            	<br />
+            	<div>
+            		<div class="col-sm-10"><h4>Add New Dialog </h4></div>
+            		<div class=""><button type="submit" class="btn btn-default" data-ng-click="resetAll()">Show Dialogs</button></div>
+            	</div>
+            	<br />
+            	<div class="panel panel-default"  >
+				  <div class="panel-heading">
+				      <h4 class="panel-title">
+				        <a data-toggle="collapse" href="#addDialogPanel">{{selectedDialog.name}}</a>
+				      </h4>
+				  </div>
+				  <div id="addDialogPanel" class="panel-collapse collapse in">
+					  <div class="panel-body">
+					  		<form class="form-inline" role="form" enctype='multipart/form-data' method="post">
+								  <div class="form-group" >
+								    <label for="name">Dialog Name:</label>
+								    <input type="text" data-ng-model="selectedDialog.name">
+								  </div>
+								  <div class="form-group">
+							   		<input type="file" accept="xml" file-model="myFile" />
+							   	  </div>
+							   	  <div class="form-group"> 
+			         			  	<button type="submit" data-ng-click="createDialogTemplate()" data-ng-if="!selectedDialog.dialog_id">create</button>
+			         			  	<button type="submit" data-ng-click="uploadDialogTemplate()" data-ng-if="selectedDialog.dialog_id">update</button>
+			         			  </div>
+							</form>
+					  </div>
+				  </div>
+				</div>
+				
+            </div>
+            
+            
+            <div class="col-sm-9" data-ng-show="showConfigDiv == 'UPDATE_DIALOG'">
+            	<br />
+            	<div>
+            		<div class="col-sm-10"><h4>Update Dialog </h4></div>
+            		<div class=""><button type="submit" class="btn btn-default" data-ng-click="resetAll()">Show Dialogs</button></div>
+            	</div>
+            	<br />
+            	<div class="panel panel-default"  >
+				  <div class="panel-heading">
+				      <h4 class="panel-title">
+				        <a data-toggle="collapse" href="#uploadDialogPanel">{{selectedDialog.name}} - ({{selectedDialog.dialog_id}})</a>
+				      </h4>
+				  </div>
+				  <div id="uploadDialogPanel" class="panel-collapse collapse in">
+					  <div class="panel-body">
+					  		<form class="form-inline" role="form" enctype='multipart/form-data' method="post">
+								  <div class="form-group" >
+								    <label for="name">Dialog Name:</label>
+								    <input type="text" data-ng-model="selectedDialog.name">
+								  </div>
+								  <div class="form-group">
+							   		<input type="file" accept="xml" file-model="myFile" />
+							   	  </div>
+							   	  <div class="form-group"> 
+			         			  	<button type="submit" data-ng-click="createDialogTemplate()" data-ng-if="!selectedDialog.dialog_id">create</button>
+			         			  	<button type="submit" data-ng-click="uploadDialogTemplate()" data-ng-if="selectedDialog.dialog_id">update</button>
+			         			  </div>
+							</form>
+					  </div>
+				  </div>
+				</div>
+				
+				<div class="panel panel-default" data-ng-if="selectedDialog.dialog_id">
+					<div class="panel-heading">
+				      <h4 class="panel-title">
+				        <a data-toggle="collapse" href="#nlcClassesPanel">NLC Classes Mapped With Dialog</a>
+				      </h4>
+				    </div>
+				    <div id="nlcClassesPanel" class="panel-collapse collapse in">
+					  <div class="panel-body">
+					  	<a class="pull-right" role="button" href="javascript:void(0);" data-ng-click="showSaveMappingsForm(null)" data-ng-show="showAddMappingLink" >Add New Mapping</a>
+					  	<form class="form-inline" role="form" method="post" data-ng-show="showMappingForm">
+								  <div class="form-group" >
+								    <label for="name">NLC Class:</label>
+								    <input type="text" data-ng-model="selectedNlcClass.nlc_class">
+								  </div>
+								  <div class="form-group">
+							   		<label for="name">Append to Input:</label>
+								    <input type="text" data-ng-model="selectedNlcClass.append_to_input">
+							   	  </div>
+							   	  <div class="form-group"> 
+			         			  	<button type="submit" data-ng-click="saveNLCMapping()" data-ng-if="!selectedNlcClass._id">create</button>
+			         			  	<button type="submit" data-ng-click="saveNLCMapping()" data-ng-if="selectedNlcClass._id">update</button>
+			         			  </div>
+							</form>
+					  	
+							<br /><br />
+							<ul class="list-group no-padding"  >
+				           	 	<li class="list-group-item"  data-ng-repeat="nlcClass in selectedDialog.mappedClasses">
+				           	 		<img src="/images/nlc.png" width="15px" />&nbsp;{{nlcClass.nlc_class}} ({{nlcClass.append_to_input}})</span>
+				            	 	<div class="pull-right">
+				            	 		<a style="text-decoration: none;" href="javascript:void(0);" data-ng-click="showSaveMappingsForm(nlcClass)" data-toggle="tooltip" data-placement="top" title="Update" > <span class="fa fa-edit" ></span></a>
+				            	 		&nbsp;<a style="color:red;text-decoration: none;" href="javascript:void(0);" data-ng-click="deleteNLCMapping(nlcClass)" data-toggle="tooltip" data-placement="top" title="Delete" > <span class="fa fa-remove" ></span></a> 
+									</div>
+								</li>
+							</ul>
+					  </div>
+					</div>
+				</div>
+				
+            </div>
+            
+           <div data-ng-show="showConfigDiv == 'TEST'">
+	            <div class="col-sm-9" >
+	            	<br />
+	            	<div>
+	            		<div class="col-sm-10"><h4> Dialog Test</h4></div>
+	            		<div class=""><button type="submit" class="btn btn-default" data-ng-click="resetAll()">Show Dialogs</button></div>
+	            	</div>
+	            	<br />
+	            	<div class="col-md-12 col-sm-12">
+			                <div class="chat-box-div">
+			                    <div class="chat-box-head">
+			                        {{selectedDialog.name}} ({{selectedDialog.dialog_id}})
+		                            <div class="btn-group pull-right">
+		                                <a class="btn btn-info btn-xs pull-right" role="button" href="javascript:void(0);" data-ng-click="resetAll()"><span class="fa fa-refresh" ></span></a>
+		                            </div>
+			                    </div>
+			                    <div class="panel-body chat-box-main" data-ng-show="conversations && conversations.length > 0" >
+			                    	<div data-ng-repeat="conversation in conversations">
+				                        <div class="chat-box-left" data-ng-if="conversation.userInput">
+				                            {{conversation.userInput}}
+				                        </div>
+				                        <div class="chat-box-name-left" data-ng-if="conversation.userInput">
+				                            <img src="images/user.png" alt="bootstrap Chat box user image" class="img-circle" />
+				                            -  User
+				                        </div>
+				                        <hr class="hr-clas" />
+				                        <div class="chat-box-right" data-ng-show="conversation.watsonResp">
+				                        	<p ng-bind-html="conversation.watsonResp | unsafe"></p>
+				                        </div>
+				                        <div class="chat-box-name-right" data-ng-show="conversation.watsonResp">
+				                            <img src="images/watson.jpg" alt="bootstrap Chat box user image" class="img-circle" />
+				                            - Watson
+				                        </div>
+				                        <hr class="hr-clas" />
+			                        </div>
+			                        
+			                    </div>
+			                    <div class="chat-box-footer">
+			                        <div class="input-group">
+			                            <input type="text" class="form-control" data-ng-model="userInput" placeholder="Enter Text Here..." data-ng-keypress="checkIfEnterPressed($event);" >
+			                            <span class="input-group-btn">
+			                                <button class="btn btn-info" type="button" data-ng-click="converseWithWatson()">SEND</button>
+			                            </span>
+			                        </div>
+			                    </div>
+			
+			                </div>
+			
+			            </div>
+	            </div>
+	            <br /><br /><br />
+	            <div class="col-sm-3">
+				    <div class="panel panel-default">
+				        <div class="panel-heading">Conversation Details</div>
+				        <div class="panel-body">
+	    					<ul class="list-unstyled">
+								<li data-ng-show="prevConversation.params && prevConversation.params.dialog_id"><a href="#" target="_blank">Dialog Id:</a> {{prevConversation.params.dialog_id}}</li>
+								<li data-ng-show="!prevConversation.params || !prevConversation.params.dialog_id"><a href="#" target="_blank">Dialog:</a> No Dialog Template</li>
+								
+								<li data-ng-show="prevConversation.dialogResp && prevConversation.dialogResp.client_id">Client Id: {{prevConversation.client_id}}</li>
+								<li data-ng-show="prevConversation.dialogResp && prevConversation.dialogResp.conversation_id">Conversation Id: {{prevConversation.dialogResp.conversation_id}}</li>
+							</ul>
+	    					
+				        </div>
+				        
+				        <div class="panel-heading">Profile Details</div>
+				        <div class="panel-body">
+	    					<ul class="list-unstyled" data-ng-if="prevConversation.dialogResp.profileVariables && prevConversation.dialogResp.profileVariables.name_values && prevConversation.dialogResp.profileVariables.name_values.length > 0" >
+	    						<li data-ng-repeat="profileVar in prevConversation.dialogResp.profileVariables.name_values" data-ng-show="profileVar.name">{{profileVar.name}}: {{profileVar.value}}</li>
+							</ul>
+				        </div>
+				    </div>
+	            </div>
+            </div>
+            
+        </div>
+        
+    </div>
+        	
+</div>
+
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
